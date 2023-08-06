@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/your-github-username/my-e-farm-revival"><img src="login.gif" alt="My e-Farm Revival - Logo" width="200"></a>
+  <a href="https://github.com/your-github-username/my-e-farm-revival"><img src="remise.jpg" alt="My e-Farm Revival - Logo" width="200"></a>
   <br>
   My e-Farm Revival
   <br>
