@@ -1,0 +1,201 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+var i18n = new Array();
+
+
+// messageAutologin
+i18n["site:messageautologin"] = "Attention, vous ne devez pas utiliser cette option si l\'ordinateur sur lequel vous êtes est utilisé par plusieurs personnes.\n\nEn effet si vous activez cette option, les autres utilisateurs de cet ordinateur pourront aller sur votre compte My e-farm sans avoir besoin de connaître votre mot de passe !\n\n Etes-vous sûr de vouloir activer cette option ?";
+
+
+// verifInscription
+i18n["site:inscriptionform"] = "Le formulaire n'est pas rempli correctement :\n\n";
+i18n["site:inscriptionciv"] = "- Vous devez choisir une civilité\n";
+i18n["site:inscriptionpays"] = "- Vous devez choisir un pays\n";
+i18n["site:inscriptiondepartement"] = "- Vous devez choisir un département\n";
+i18n["site:inscriptionemail"] = "- L'adresse e-mail ne semble pas correcte\n";
+i18n["site:inscriptionpseudo"] = "- Le champ pseudo doit faire 2 caractères minimum\n";
+i18n["site:inscriptiopassword"] = "- Le mot de passe est vide\n";
+i18n["site:inscriptionregles"] = "- Vous devez accepter les règles du jeu\n";
+i18n["site:inscriptionanniv"] = "- Votre date de naissance n'a pas l'air correcte\n";
+
+
+// verifContact
+i18n["site:contactform"] = "Le formulaire n'est pas rempli correctement :\n\n";
+i18n["site:contactnom"] = "- Le champ nom est vide\n";
+i18n["site:contactemail"] = "- L'adresse e-mail ne semble pas correcte\n";
+i18n["site:contactmsgvide"] = "- Le message est vide\n";
+
+
+// verifContactCode
+i18n["site:contactcodeform"] = "Le formulaire n'est pas rempli correctement :\n\n";
+i18n["site:contactcodepseudo"] = "- Le champ pseudo est vide\n";
+i18n["site:contactcodeemail"] = "- L'adresse e-mail ne semble pas correcte\n";
+i18n["site:contactcodevide"] = "- Le champ code est vide\n";
+i18n["site:contactcodeservice"] = "- Vous devez spécifier le service concerné\n";
+i18n["site:contactcodetype"] = "- Vous devez préciser le type de code\n";
+i18n["site:contactcodequand"] = "- La date et l'heure d'obtention est vide\n";
+
+
+// verifPassword
+i18n["site:passwordform"] = "Le formulaire n'est pas rempli correctement :\n\n";
+i18n["site:passwordpseudo"] = "- Le champ pseudo est vide\n";
+i18n["site:passwordemail"] = "- L'adresse e-mail ne semble pas correcte\n";
+
+
+// verifMotdepasse
+i18n["site:motdepasseform"] = "Le formulaire n'est pas rempli correctement :\n\n";
+i18n["site:motdepassevide"] = "- Le champ mot de passe actuel est vide\n";
+i18n["site:motdepassepasvide"] = "- Le champ du nouveau mot de passe ne doit pas être vide\n";
+i18n["site:motdepasseidentique"] = "- Votre nouveau mot de passe ne doit pas être identique à votre pseudo\n";
+
+
+// verifRechercheForum
+i18n["site:rechercheforummotif"] = "Le motif de recherche doit faire 2 caractères minimum";
+
+
+// validVenteVehiculeN2
+i18n["site:validventevehiculen2"] = "Etes-vous sûr de vouloir vendre votre véhicule à la casse ?";
+
+
+// selectN2Couveuses
+i18n["site:n2couveusespoulaillers"] = " poulaillers sélectionnés";
+i18n["site:n2couveusesaucun"] = "Aucun";
+i18n["site:n2couveusespoulailler"] = " poulailler sélectionné";
+
+
+// verifPost
+i18n["site:verifpostform"] = "Le formulaire n'est pas rempli correctement :\n\n";
+i18n["site:verifposttitrevide"] = "- Le champ titre est vide\n";
+i18n["site:verifpostmsgvide"] = "- Le message est vide\n";
+
+
+// addGras
+i18n["site:addgras"] = "[b]Le texte ici[/b]";
+
+// addCouleur
+i18n["site:addcouleur"] = "[couleur=blue]Le texte ici[/couleur]";
+
+// addIndice
+i18n["site:addindice"] = "[indice]L\'indice ici[/indice]";
+
+
+// addAutoSMS
+i18n["site:addautosms"] = "[couleur=red]Attention : tous dans ce forum ne savent pas déchiffrer le \"style SMS\"... Merci donc de ne pas l\'utiliser.[/couleur]";
+
+// addAutoSoluce
+i18n["site:addautosoluce"] = "[couleur=green]Le post du joueur ... a été modifié car il contenait des soluces. Merci d\'utiliser vos MP pour des échanges trop techniques.[/couleur]";
+
+// addAutoIndice
+i18n["site:addautoindice"] = "[couleur=blue]Les indices ne sont pas là pour jouer avec, merci.\n\nPour une meilleure utilisation des indices vous pouvez lire ce post :\nhttp://fr.myefarm.com/forum.php?f=254&p=5435294 <:)[/couleur]";
+
+// addAutoSanction
+i18n["site:addautosanction"] = "[couleur=blue]Le joueur ... a été sanctionné suite à ...[/couleur]";
+
+
+// verifMessage
+i18n["site:verifmessageform"] = "Le formulaire n'est pas rempli correctement :\n\n";
+i18n["site:verifmessagedesti"] = "- Vous n'avez pas choisi de destinataire\n";
+i18n["site:verifmessagetitrevide"] = "- Le champ titre est vide\n";
+i18n["site:verifmessagemsgvide"] = "- Le message est vide\n";
+
+
+// verifVenteN3Animaux
+i18n["site:venten3animauxform"] = "Le formulaire n'est pas rempli correctement :\n\n";
+i18n["site:venten3animauxquant"] = "- La quantité doit être supérieure à 0\n";
+i18n["site:venten3animauxprixsup"] = "- Le prix de vente doit être supérieur à 0\n";
+i18n["site:venten3animauxprixnoncorrect"] = "- Le prix de vente ne semble pas correct\n";
+
+
+// confirmReinit
+i18n["site:confirmreinit"] = "Etes-vous sûr de vouloir réinitialiser votre compte ?";
+
+
+// boutiqueTSVerifAjoute
+i18n["site:boutiqueTSinformations"] = "Vous avez oublié d'indiquer des informations :\n\n";
+i18n["site:boutiqueTSpasdevisuel"] = "- Vous n'avez pas choisi de visuel\n";
+i18n["site:boutiqueTSpasdetaille"] = "- Vous n'avez pas choisi de taille\n";
+i18n["site:boutiqueTSquantitenull"] = "- La quantité est nulle\n";
+
+
+// boutiqueVerifAdresse
+i18n["site:boutiqueVerifAdresseform"] = "Le formulaire est incomplet :\n\n";
+i18n["site:boutiqueVerifAdresselivr"] = "- Mettez votre adresse de livraison\n";
+
+
+
+
+
+
+// getMenuRemiseJeter
+i18n["popinto:getMenuRemiseJeter1"] = "Jeter 1";
+i18n["popinto:getMenuRemiseJetertous"] = "Jeter tous";
+
+
+// Mot clé dans la remise
+i18n["popinto:poulailler"] = "Poulailler";
+i18n["popinto:clapier"] = "Clapier";
+i18n["popinto:paturages"] = "Pâturages";
+i18n["popinto:manger"] = "Manger";
+i18n["popinto:ranger"] = "Ranger dans ma collection";
+i18n["popinto:vendremarche"] = "Vendre marché";
+i18n["popinto:vendremarchenoir"] = "Vendre marché Noir";
+i18n["popinto:cooperative"] = "Coopérative";
+i18n["popinto:marche"] = "Marché";
+i18n["popinto:marchenoir"] = "Marché noir";
+
+
+// showVisuelBoutique
+i18n["popinto:showVisuelBoutique"] = "Cliquer pour zoomer";
+
+
+// showMenuForumEtat
+i18n["popinto:showMenuForumEtatnonlu"] = "Non lu";
+i18n["popinto:showMenuForumEtatininteressant"] = "Inintéressant";
+i18n["popinto:showMenuForumEtatresolu"] = "Résolu et verrouillé";
+i18n["popinto:showMenuForumEtatencours"] = "En cours";
+i18n["popinto:showMenuForumEtatgrave"] = "Grave";
+
+
+// showMenuForumImportance
+i18n["popinto:showMenuForumImportancenormal"] = "Normal";
+i18n["popinto:showMenuForumImportancepunaise"] = "Punaisé";
+
+
+// showMenuForumReponseAuto
+i18n["popinto:antisms"] = "Anti-SMS";
+i18n["popinto:antisoluce"] = "Anti-soluce";
+i18n["popinto:indice"] = "Indice";
+i18n["popinto:sanction"] = "Sanction";
+
+
+}
+/*
+     FILE ARCHIVED ON 15:45:14 Feb 11, 2011 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:28:21 Aug 06, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 85.219
+  exclusion.robots: 0.226
+  exclusion.robots.policy: 0.216
+  RedisCDXSource: 0.628
+  esindex: 0.01
+  LoadShardBlock: 63.942 (3)
+  PetaboxLoader3.datanode: 75.357 (4)
+  load_resource: 37.744
+  PetaboxLoader3.resolve: 22.229
+*/

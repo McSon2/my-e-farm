@@ -1,0 +1,958 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+var nn, ie, gecko, opera;
+var menuobj;
+var tmr;
+var mouseX, mouseY;
+
+// On detecte le navigateur
+var nn=(document.layers)?1:0;
+var ie=(document.all)?1:0;
+var gecko=(window.navigator.userAgent.toLowerCase().match('gecko'))?1:0;
+var opera=(window.navigator.userAgent.toLowerCase().match('opera'))?1:0;
+
+
+
+
+
+
+// ***********************************************************************
+// La gestion des clics de la souris
+// ***********************************************************************
+
+// Initialise la capture du mouvement
+function initMouseMove()
+{
+  // On capture le mouvement de la souris
+  if (ie || gecko)
+  {
+    document.onmousemove=captureMousePosition;
+	}
+	else if (nn)
+	{
+		document.captureEvents(Event.MOUSEMOVE);
+    document.onmousemove=captureMousePosition;
+	}
+}
+
+
+
+
+
+// Capture le mouvement de la souris
+function captureMousePosition(evt)
+{
+	if (nn || gecko)
+	{
+		mouseX=evt.pageX;
+		mouseY=evt.pageY;
+	}
+	else if (ie)
+	{
+		mouseX=window.event.x+document.body.scrollLeft;
+		mouseY=window.event.y+document.body.scrollTop;
+	}
+}
+
+
+
+
+
+
+
+// ***********************************************************************
+// Les fonctions generales des pop-into
+// ***********************************************************************
+
+// Cache le menu contextuel
+function hideMenu()
+{
+	menuobj.style.left=0;
+	menuobj.style.top=0;
+
+	menuobj.style.visibility='hidden';
+}
+
+// Cree l'en-tete du menu
+function getMenuHeader()
+{
+	var str=new String();
+
+	str='<table cellpadding=0 cellspacing=1 class=clfonce><tr><td><table cellpadding=0 cellspacing=1 class=clclair><tr><td><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" height=3></td></tr>';
+
+	return str;
+}
+
+// Cree le footer du menu
+function getMenuFooter()
+{
+	var str=new String();
+
+	str='<tr><td><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" height=3></td></tr></table></td></tr></table>';
+
+	return str;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ***********************************************************************
+// La pop-into de la remise
+// ***********************************************************************
+
+// Affiche le menu contextuel
+function showMenuRemise(type, niveau)
+{
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+	{
+		menuobj=document.getElementById('contextMenu');
+	}
+	else if (nn)
+	{
+	menuobj=document.contextMenu;
+	}
+
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+
+	// On genere le menu selon le type d'article
+	str=getMenuHeader();
+	switch (type)
+	{
+		case  0 :	// Sac de nourriture
+							if (niveau==1) str+=getMenuRemiseActMiFull(type);
+							str+=getMenuRemiseVente(type);
+							break;
+		case  1 :	// Seau d'eau
+		case  2 :	// Savon
+		case  3 :	// Seringue
+							if (niveau==1) str+=getMenuRemiseActFull(type);
+							str+=getMenuRemiseVente(type);
+							break;
+		case  4 :	// Paille
+							if (niveau==1) str+=getMenuRemiseActPat(type);
+							str+=getMenuRemiseVente(type);
+							break;
+		case  10 :	// Sac de ble
+							str+=getMenuRemiseVente(type);
+							break;
+		case  11 :	// Sac de mais
+							str+=getMenuRemiseVente(type);
+							break;
+		case  12 :	// Cageot de carottes
+							str+=getMenuRemiseVente(type);
+							break;
+		case  13 :	// Cageot de salades
+							str+=getMenuRemiseVente(type);
+							break;
+		case  14 :	// Motte de beurre
+							str+=getMenuRemiseVente(type);
+							break;
+		case  22 :	// Shampoing
+							str+=getMenuRemiseVente(type);
+							break;
+		case  23 :	// Soins
+							str+=getMenuRemiseVente(type);
+							break;
+		case  24 :	// Botte de paille
+							str+=getMenuRemiseVente(type);
+							break;
+
+		case  600 :	// Poule en chocolat
+							str+=getMenuRemiseActChoc(type);
+							break;
+		case  601 :	// Lapin en chocolat
+							str+=getMenuRemiseActChoc(type);
+							break;
+		case  602 :	// Poisson en chocolat
+							str+=getMenuRemiseActChoc(type);
+							break;
+	}
+	if (niveau>1 && type!=22 && type!=23 && type!=24) str+=getMenuRemiseVenteNoir(type);
+	if (type>=500) str+=getMenuRemiseCollectionner(type);
+	str+=getMenuRemiseJeter(type);
+	str+=getMenuFooter();
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+	menuobj.style.left=mouseX;
+	menuobj.style.top=mouseY;
+
+	// On l'affiche
+	menuobj.style.visibility='visible';
+
+	// On met le timeout
+	tmr=setTimeout('hideMenu();', 4000);
+}
+
+
+
+
+// Cree le menu avec les fonctions jeter 1 / jeter tous
+function getMenuRemiseJeter(type)
+{
+	var str=new String();
+
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=98>Jeter 1</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=99>Jeter tous</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+
+	return str;
+}
+
+
+
+
+
+// Cree le menu contextuel avec toutes les actions
+function getMenuRemiseActFull(type)
+{
+	var str=new String();
+
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=1>Poulailler</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=2>Clapier</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=3>Pâturages</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+
+	return str;
+}
+
+
+
+
+// Cree le menu contextuel avec toutes les actions sauf les paturages
+function getMenuRemiseActMiFull(type)
+{
+	var str=new String();
+
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=1>Poulailler</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=2>Clapier</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+
+	return str;
+}
+
+
+
+
+// Cree le menu contextuel juste pour les paturages
+function getMenuRemiseActPat(type)
+{
+	var str=new String();
+
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=3>Pâturages</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+
+	return str;
+}
+
+
+
+
+// Cree le menu contextuel juste pour manger l'objet
+function getMenuRemiseActChoc(type)
+{
+	var str=new String();
+
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=98>Manger</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+
+	return str;
+}
+
+
+
+// Cree le menu contextuel juste pour ajouter l'objet a la collection
+function getMenuRemiseCollectionner(type)
+{
+	var str=new String();
+
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=50>Ranger dans ma collection</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+
+	return str;
+}
+
+
+
+
+// Cree le menu contextuel juste pour le marche eleveurs
+function getMenuRemiseVente(type)
+{
+	var str=new String();
+
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=100>Vendre marché</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+
+	return str;
+}
+
+
+
+// Cree le menu contextuel juste pour le marche noir
+function getMenuRemiseVenteNoir(type)
+{
+	var str=new String();
+
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=act_remise.php?type='+type+'&act=101>Vendre marché Noir</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+
+	return str;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ***********************************************************************
+// Les pop-into de la vente des animaux N2
+// ***********************************************************************
+
+// Affiche le menu contextuel pour la vente des poussins
+function showMenuVenteN2Poussin()
+{
+	// On ne fait quelques chose que si les chiffres sont > 0
+	if (document.poulette.coq.value<1 && document.poulette.poule.value<1) return false;
+
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+  {
+	  menuobj=document.getElementById('contextMenu');
+  }
+	else if (nn)
+  {
+	  menuobj=document.contextMenu;
+  }
+
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+	// On prepare les parametres du get
+	param='type=1000&nbm='+document.poulette.coq.value+'&nbf='+document.poulette.poule.value;
+
+	// On genere le menu
+	str=getMenuHeader();
+	// Le contenu du menu
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href="javascript:valid(\'poulette\', 4);">Coopérative</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=0&'+param+'>Marché</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=1&'+param+'>Marché noir</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+=getMenuFooter();
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+  menuobj.style.left=mouseX;
+  menuobj.style.top=mouseY;
+
+	// On l'affiche
+  menuobj.style.visibility='visible';
+
+  // On met le timeout
+  tmr=setTimeout('hideMenu();', 4000);
+}
+
+
+// Affiche le menu contextuel pour la vente des poules
+function showMenuVenteN2Poule()
+{
+	// On ne fait quelques chose que si les chiffres sont > 0
+	if (document.poule.coq.value<1 && document.poule.poule.value<1) return false;
+
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+  {
+	  menuobj=document.getElementById('contextMenu');
+  }
+	else if (nn)
+  {
+	  menuobj=document.contextMenu;
+  }
+
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+	// On rempli le formulaire
+	//document.poule.action='vente_animaux.php';
+	// On prepare les parametres du get
+	//param='type=1005&nbm='+document.poule.coq.value+'&nbf='+document.poule.poule.value;
+
+	// On genere le menu
+	str=getMenuHeader();
+	// Le contenu du menu
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href="javascript:validVenteN2Poule(0);">Coopérative</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href="javascript:validVenteN2Poule(1);">Marché</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href="javascript:validVenteN2Poule(2);">Marché noir</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+=getMenuFooter();
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+  menuobj.style.left=mouseX;
+  menuobj.style.top=mouseY;
+
+	// On l'affiche
+  menuobj.style.visibility='visible';
+
+  // On met le timeout
+  tmr=setTimeout('hideMenu();', 4000);
+}
+
+
+// Valide la vente des poules
+function validVenteN2Poule(ou)
+{
+	// On met la page de destination en fonction du marche voulu
+	if (ou==0)
+	{
+		document.poule.act.value=6;
+		document.poule.action='act_poulailler.php';
+	}
+	if (ou==1) document.poule.action='vente_animaux.php?m=0';
+	if (ou==2) document.poule.action='vente_animaux.php?m=1';
+
+	// On valide le formulaire
+	document.poule.submit();
+}
+
+
+
+// Affiche le menu contextuel pour la vente des lapins
+function showMenuVenteN2Lapin()
+{
+	// On ne fait quelques chose que si les chiffres sont > 0
+	if (document.lapin.male.value<1 && document.lapin.femelle.value<1) return false;
+
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+  {
+	  menuobj=document.getElementById('contextMenu');
+  }
+	else if (nn)
+  {
+	  menuobj=document.contextMenu;
+  }
+
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+	// On prepare les parametres du get
+	param='type=1010&nbm='+document.lapin.male.value+'&nbf='+document.lapin.femelle.value;
+
+	// On genere le menu
+	str=getMenuHeader();
+	// Le contenu du menu
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href="javascript:valid(\'lapin\', 6);">Coopérative</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=0&'+param+'>Marché</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=1&'+param+'>Marché noir</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+=getMenuFooter();
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+  menuobj.style.left=mouseX;
+  menuobj.style.top=mouseY;
+
+	// On l'affiche
+  menuobj.style.visibility='visible';
+
+  // On met le timeout
+  tmr=setTimeout('hideMenu();', 4000);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ***********************************************************************
+// Les pop-into de la vente des animaux N3
+// ***********************************************************************
+
+// Affiche le menu contextuel pour la vente des poussins
+function showMenuVenteN3Poussin()
+{
+	// On ne fait quelques chose que si les chiffres sont > 0
+	if (document.poussin.nbm.value<1 && document.poussin.nbf.value<1) return false;
+
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+  {
+	  menuobj=document.getElementById('contextMenu');
+  }
+	else if (nn)
+  {
+	  menuobj=document.contextMenu;
+  }
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+	// On prepare les parametres du get
+	param='type=1000&nbm='+document.poussin.nbm.value+'&nbf='+document.poussin.nbf.value;
+
+	// On genere le menu
+	str=getMenuHeader();
+	// Le contenu du menu
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href="javascript:valid(\'poussin\', 7);">Coopérative</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=0&'+param+'>Marché</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=1&'+param+'>Marché noir</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+=getMenuFooter();
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+  menuobj.style.left=mouseX;
+  menuobj.style.top=mouseY;
+
+	// On l'affiche
+  menuobj.style.visibility='visible';
+
+  // On met le timeout
+  tmr=setTimeout('hideMenu();', 4000);
+}
+
+
+// Affiche le menu contextuel pour la vente des poules
+function showMenuVenteN3Poule()
+{
+	// On ne fait quelques chose que si les chiffres sont > 0
+	if (document.poule.nbm.value<1 && document.poule.nbf.value<1) return false;
+
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+  {
+	  menuobj=document.getElementById('contextMenu');
+  }
+	else if (nn)
+  {
+	  menuobj=document.contextMenu;
+  }
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+	// On prepare les parametres du get
+	param='type=1005&nbm='+document.poule.nbm.value+'&nbf='+document.poule.nbf.value;
+
+	// On genere le menu
+	str=getMenuHeader();
+	// Le contenu du menu
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href="javascript:valid(\'poule\', 7);">Coopérative</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=0&'+param+'>Marché</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=1&'+param+'>Marché noir</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+=getMenuFooter();
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+  menuobj.style.left=mouseX;
+  menuobj.style.top=mouseY;
+
+	// On l'affiche
+  menuobj.style.visibility='visible';
+
+  // On met le timeout
+  tmr=setTimeout('hideMenu();', 4000);
+}
+
+
+// Affiche le menu contextuel pour la vente des lapins
+function showMenuVenteN3Lapin()
+{
+	// On ne fait quelques chose que si les chiffres sont > 0
+	if (document.lapin.male.value<1 && document.lapin.femelle.value<1) return false;
+
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+  {
+	  menuobj=document.getElementById('contextMenu');
+  }
+	else if (nn)
+  {
+	  menuobj=document.contextMenu;
+  }
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+	// On prepare les parametres du get
+	param='type=1010&nbm='+document.lapin.male.value+'&nbf='+document.lapin.femelle.value;
+
+	// On genere le menu
+	str=getMenuHeader();
+	// Le contenu du menu
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href="javascript:valid(\'lapin\', 7);">Coopérative</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=0&'+param+'>Marché</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" align=left><a href=vente_animaux.php?m=1&'+param+'>Marché noir</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+=getMenuFooter();
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+  menuobj.style.left=mouseX;
+  menuobj.style.top=mouseY;
+
+	// On l'affiche
+  menuobj.style.visibility='visible';
+
+  // On met le timeout
+  tmr=setTimeout('hideMenu();', 4000);
+}
+
+
+
+
+
+
+
+
+
+
+// ***********************************************************************
+// La pop-into de la boutique
+// ***********************************************************************
+
+function showVisuelBoutique(article, zoom)
+{
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+	{
+		menuobj=document.getElementById('contextMenu');
+	}
+	else if (nn)
+	{
+		menuobj=document.contextMenu;
+	}
+
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+
+	// On genere le menu d'apercu
+	str='<table cellpadding=0 cellspacing=3 class=clfonce><tr><td><table cellpadding=0 cellspacing=3 bgcolor=white><tr><td><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" height=3></td></tr>';
+	str+='<tr><td><a href='+zoom+' target=apercu><img src='+article+' border=0></a></td></tr>';
+	str+='<tr><td align=center class=label>Cliquer pour zoomer</td></tr>';
+	str+='<tr><td><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" height=3></td></tr></table></td></tr></table>';
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+	menuobj.style.left=mouseX;
+	menuobj.style.top=mouseY;
+
+	// On l'affiche
+	menuobj.style.visibility='visible';
+
+	// On met le timeout
+	tmr=setTimeout('hideMenu();', 2500);
+}
+
+
+
+
+
+
+
+
+
+
+// ***********************************************************************
+// La pop-into du forum pour l'etat d'un post
+// ***********************************************************************
+
+function showMenuForumEtat(f,post)
+{
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+	{
+		menuobj=document.getElementById('contextMenu');
+	}
+	else if (nn)
+	{
+		menuobj=document.contextMenu;
+	}
+
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+
+	// On genere le menu
+	str=getMenuHeader();
+	// Le contenu du menu
+	str+='<tr><td><nobr><a href=act_forum.php?act=10&f='+f+'&p='+post+'><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce-0.gif" border=0> Non lu</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><a href=act_forum.php?act=11&f='+f+'&p='+post+'><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce-1.gif" border=0> Inintéressant</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><a href=act_forum.php?act=12&f='+f+'&p='+post+'><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce-2.gif" border=0><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/cadena.gif" hspace=2 border=0> Résolu et verrouillé</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><a href=act_forum.php?act=13&f='+f+'&p='+post+'><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce-3.gif" border=0> En cours</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><a href=act_forum.php?act=14&f='+f+'&p='+post+'><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce-4.gif" border=0> Grave</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+=getMenuFooter();
+
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+	menuobj.style.left=mouseX;
+	menuobj.style.top=mouseY;
+
+	// On l'affiche
+	menuobj.style.visibility='visible';
+
+	// On met le timeout
+	tmr=setTimeout('hideMenu();', 2500);
+}
+
+
+
+
+
+
+
+
+
+// ***********************************************************************
+// La pop-into du forum pour l'importance d'un post
+// ***********************************************************************
+
+function showMenuForumImportance(f,post)
+{
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+	{
+		menuobj=document.getElementById('contextMenu');
+	}
+	else if (nn)
+	{
+		menuobj=document.contextMenu;
+	}
+
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+
+	// On genere le menu
+	str=getMenuHeader();
+	// Le contenu du menu
+	str+='<tr><td><nobr><a href=act_forum.php?act=20&f='+f+'&p='+post+'><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/punaise-0.gif" border=0> Normal</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><a href=act_forum.php?act=21&f='+f+'&p='+post+'><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/punaise-1.gif" border=0> Punaisé</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+=getMenuFooter();
+
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+	menuobj.style.left=mouseX;
+	menuobj.style.top=mouseY;
+
+	// On l'affiche
+	menuobj.style.visibility='visible';
+
+	// On met le timeout
+	tmr=setTimeout('hideMenu();', 2500);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ***********************************************************************
+// La pop-into du forum pour les reponses pre-remplies
+// ***********************************************************************
+
+function showMenuForumReponseAuto()
+{
+	var str=new String();
+
+	// On recupere le menu
+	if (ie || gecko)
+	{
+		menuobj=document.getElementById('contextMenu');
+	}
+	else if (nn)
+	{
+		menuobj=document.contextMenu;
+	}
+
+
+	// On cache le menu
+	clearTimeout(tmr);
+	hideMenu();
+
+
+	// On genere le menu
+	str=getMenuHeader();
+	// Le contenu du menu
+	str+='<tr><td><nobr><a href="javascript:addAutoSMS()"><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" border=0 align=left> Anti-SMS</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><a href="javascript:addAutoSoluce()"><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" border=0 align=left> Anti-soluce</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><a href="javascript:addAutoIndice()"><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" border=0 align=left> Indice</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+='<tr><td><nobr><a href="javascript:addAutoSanction()"><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/puce.gif" border=0 align=left> Sanction</a><img src="https://web.archive.org/web/20071013104955/http://img.myefarm.com/img/px.gif" width=8></nobr></td></tr>';
+	str+=getMenuFooter();
+
+
+	// On met le menu dans le HTML
+	menuobj.innerHTML=str;
+
+	// On place le menu
+	menuobj.style.left=mouseX;
+	menuobj.style.top=mouseY;
+
+	// On l'affiche
+	menuobj.style.visibility='visible';
+
+	// On met le timeout
+	tmr=setTimeout('hideMenu();', 2500);
+}
+
+
+
+
+
+
+
+
+
+
+// ***********************************************************************
+// Les messages d'erreur
+// ***********************************************************************
+
+// La fonction qui affiche le message d'erreur
+function errorMessage()
+{
+	// Le message est-il encore actif ?
+	if (document.getElementById('errorpop').style.visibility!='hidden')
+	{
+
+		// La taille de la fenetre
+		var h=document.body.clientHeight;
+		var w=document.body.clientWidth;
+		var t=(window.pageYOffset) ? window.pageYOffset : document.body.scrollTop;
+
+		// On redimensionne le calque de fond du message d'erreur
+		document.getElementById('errorbg').style.height=t+h;
+		document.getElementById('errorbg').style.width=w;
+
+		// On positionne la pop-into d'erreur au milieu de la fenetre
+		document.getElementById('errorpop').style.top=t+(h-210)/2;
+		document.getElementById('errorpop').style.left=(w-450)/2;
+
+		// On relance la fonction
+		setTimeout('errorMessage();', 100);
+	}
+}
+
+// La fonction qui ferme le message d'erreur
+function errorMessageOut()
+{
+	// On cache les 2 calques
+	document.getElementById('errorbg').style.visibility='hidden';
+	document.getElementById('errorpop').style.visibility='hidden';
+}
+
+
+
+}
+/*
+     FILE ARCHIVED ON 10:49:55 Oct 13, 2007 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:16:56 Aug 06, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 65.893
+  exclusion.robots: 0.069
+  exclusion.robots.policy: 0.06
+  cdx.remote: 0.08
+  esindex: 0.009
+  LoadShardBlock: 38.731 (3)
+  PetaboxLoader3.datanode: 177.362 (4)
+  load_resource: 178.626
+  PetaboxLoader3.resolve: 36.409
+*/

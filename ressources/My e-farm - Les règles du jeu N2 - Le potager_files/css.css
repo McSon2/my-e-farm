@@ -1,0 +1,319 @@
+/* Les styles par defaut */
+BODY
+{
+	font-family: verdana;
+	font-size: 12px;
+	color: black;
+	background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/fond.jpg");
+	background-repeat: repeat-x;
+	background-attachment: fixed;
+	background-color: #8AC57F;
+	scrollbar-track-color: #DBEED8;
+	scrollbar-base-color: #A3D45E;
+	scrollbar-arrow-color: black;
+	margin: 0;
+}
+TD	{font-family:verdana;font-size:12px;color:black;}
+H3
+{
+	font-size:20px;
+	font-weight:900;
+	margin-top: 2px;
+}
+
+
+
+/* Un body avec des marges plus grandes */
+.marges10	{margin: 10px;}
+.marges30	{margin: 30px;}
+
+
+
+
+/* La pub */
+#publicite		{position:relative;top:0;}
+
+
+
+
+/* Pour ecrire en plus petit */
+.petit	{font-size:11px;}
+.petitright	{font-size:11px;font-style:italic;text-align:right}
+.mini	{font-size:10px;}
+
+
+
+
+/* Les liens */
+A		{font-weight:bold;text-decoration:none;color:black;}
+A:hover		{text-decoration:underline;}
+.clean		{font-weight:100;}
+.nohover:hover		{text-decoration:none;}
+
+/* Pour le forum */
+.af:link		{font-weight:bold;text-decoration:none;color:black;}
+.af:visited		{font-weight:bold;text-decoration:none;color:#666666;}
+.af:hover		{text-decoration:underline;}
+.afred:link		{font-weight:bold;text-decoration:none;color:red;}
+.afred:hover		{text-decoration:underline;}
+.indiceB		{font-style:italic;background-color:#C5C5C5;}
+.indice			{font-style:italic;}
+
+
+
+
+/* Les 3 teintes de couleurs d'applat */
+.clclair	{background-color:#DBEED8;}
+.clmoyen	{background-color:#B2DA7A;}
+.clfonce	{background-color:#50A840;}
+
+/* La bordure des tableaux de contenu */
+.clbordure	{background-color:black;}
+
+
+
+/* Le classes du sondage */
+.sdgborder	{background-color:#50A840;}
+.sdgpourtour	{background-color:#B2DA7A;}
+.sdgfond	{background-color:#DBEED8;}
+
+
+/* Le sous-titre de la page d'accueil */
+.grosLabel		{font-size:12px;color:#666666;}
+
+
+
+
+/* Le cadre autour des images */
+.cadre	{border: 1px solid black;}
+
+
+
+/*  */
+.box		{font-size:11px;font-weight:bold;width:110px;}
+/*  */
+.box2		{font-size:11px;font-weight:bold;width:40px;}
+/*  */
+.box3		{font-size:11px;font-weight:bold;width:350;}
+/*  */
+.box4		{font-size:11px;font-weight:bold;width:200px;}
+/*  */
+.boxmess	{width:500;}
+/*  */
+.boxmarche		{font-size:11px;font-weight:bold;width:35px;text-align:center;}
+/*  */
+/*  */
+.boxnaiss		{font-size:11px;font-weight:bold;width:25px;}
+/*  */
+.boxvend		{font-size:11px;font-weight:bold;width:25px;text-align:right;}
+.boxvend3		{font-size:11px;font-weight:bold;width:30px;text-align:right;}
+.boxvend4		{font-size:11px;font-weight:bold;width:35px;text-align:right;}
+.boxvend11		{font-size:11px;font-weight:bold;width:85px;text-align:right;}
+/*  */
+.boxtotal		{font-size:11px;font-weight:bold;width:60px;text-align:right;}
+/*	*/
+.boxread		{font-size:11px;font-weight:bold;width:120px;text-align:right;border:0;background-color:#DBEED8;cursor:default;}
+
+
+.boxpost		{width:450;}
+
+
+/* Le textarea de la page des pubs du site */
+.codepub		{width:468;border-width:1;overflow:hidden;}
+
+
+
+
+
+/* Le textarea du bloc-note */
+.blocnote		{width:550;border-width:1;}
+.blocnotepop{width:810;border-width:1;}
+
+
+
+
+/* Les boutons d'action */
+.action	{background-color:#C1E195;font-weight:bold;}
+.label		{font-size:11px;color:#666666;}
+.label2	{font-size:11px;color:#666666;font-weight:normal;}
+
+
+
+
+
+/* Les messages importants */
+.red		{font-weight:bold;color:red;}
+.green		{font-weight:bold;color:green;}
+.white		{color:white;}
+
+
+
+
+/* Le popup menu */
+#contextMenu		{position:absolute;visibility:hidden;z-index:10;}
+
+
+
+
+/* Les messages d'erreur */
+#errorbg	{position:absolute;top:0;left:0;z-index:12;background-color:black;filter:alpha(opacity=60);-moz-opacity:0.6;}
+#errorpop	{position:absolute;top:0;left:0;z-index:13;}
+
+
+
+
+/* Le footer */
+.footer		{font-size:11px;color:#666666;}
+
+
+
+
+
+/* L'herbe sous les titres */
+.rbe_fond_380, .rbe_fond_440, .rbe_fond_480, .rbe_fond_510, .rbe_fond_550
+{
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.rbe_fond_380	{background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/rbe_fond_380.gif");}
+.rbe_fond_440	{background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/rbe_fond_440.gif");}
+.rbe_fond_480	{background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/rbe_fond_480.gif");}
+.rbe_fond_510	{background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/rbe_fond_510.gif");}
+.rbe_fond_550	{background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/rbe_fond_550.gif");}
+
+
+
+
+/* ******* Les onglets ******** */
+.onglet_support
+{
+	text-align: left;
+	background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/fond.gif");
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	width: 895px !important; /* mozilla&co */
+	width: 930px; /* IE */
+	padding-left: 35px;
+	padding-bottom: 19px;
+}
+.onglet_off	{background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/c.gif");}
+.onglet_on	{background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/c1.gif");}
+.onglet_d	{width:17px;height:20px;background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/d.gif");}
+.onglet_d1	{width:17px;height:20px;background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/d1.gif");}
+.onglet_g	{width:17px;height:20px;background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/g.gif");}
+.onglet_g1	{width:17px;height:20px;background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/g1.gif");}
+.onglet_trio	{width:34px;height:20px;background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/trio.gif");}
+.onglet_triog	{width:34px;height:20px;background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/triog.gif");}
+.onglet_trioc	{width:34px;height:20px;background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/trioc.gif");}
+.onglet_triod	{width:34px;height:20px;background-image:url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/hd/triod.gif");}
+
+
+
+
+
+
+
+/* Les style de bloc
+-------------------------------------------------------- */
+.bloc_head
+{
+	background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/bloc/hd.gif");
+	background-position: left top;
+	background-repeat: no-repeat;
+	width: 150px;
+	height: 53px;
+	padding-top: 5px;
+}
+
+.bloc_body
+{
+	background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/bloc/bd.gif");
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	margin-top: -23px !important; /* mozilla&co */
+	margin-top: -18px; /* IE */
+	width: 150px;
+}
+
+.bloc_inbody
+{
+	background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/bloc/ft.gif");
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-bottom: 14px;
+}
+
+.bloc_inbody_court
+{
+	background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/bloc/ftcourt.gif");
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-bottom: 14px;
+}
+
+
+.bloc_separateur
+{
+	padding-bottom: 8px;
+	line-height: 1px;
+}
+
+
+/* Les menus des bloc
+-------------------------------------------------------- */
+
+.bloc_inbody form
+{
+	margin: 0 0 0 0;
+}
+
+.bloc_inbody ul
+{
+	padding: 0;
+	margin: 0;
+}
+
+.bloc_inbody li
+{
+	padding-left: 18px;
+	margin-top: 2px;
+	line-height: 18px;
+	background-image: url("https://web.archive.org/web/20071013104238im_/http://img.myefarm.com/img/puce2.gif");
+	background-repeat: no-repeat;
+	background-position: left top;
+	list-style-type: none;
+	list-style-position: outside;
+}
+
+.bloc_inbody ul.top10 li
+{
+	padding-left: 7px;
+	margin-top: 2px;
+	line-height: 16px;
+	background-image: url(/web/20071013104238im_/http://fr.myefarm.com/img/none);
+}
+
+/*
+     FILE ARCHIVED ON 10:42:38 Oct 13, 2007 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:28:21 Aug 06, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 88.581
+  exclusion.robots: 0.068
+  exclusion.robots.policy: 0.06
+  RedisCDXSource: 0.577
+  esindex: 0.007
+  LoadShardBlock: 70.134 (3)
+  PetaboxLoader3.datanode: 89.59 (4)
+  load_resource: 106.859
+  PetaboxLoader3.resolve: 78.258
+*/

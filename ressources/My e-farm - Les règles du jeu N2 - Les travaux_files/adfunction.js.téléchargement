@@ -1,0 +1,119 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+
+function lea_getter(refurl,other,cc) {
+  var adsrv, i;
+
+  switch(cc)
+  {
+    case "dk":
+      adsrv="https://web.archive.org/web/20071012052101/http://ads2.jubii.dk/ats/";
+      break;
+    case "no":
+      adsrv="https://web.archive.org/web/20071012052101/http://fe.lea.nettavisen.no/ats/";
+      break;
+    case "se":
+      adsrv="https://web.archive.org/web/20071012052101/http://fe.lea.spray.se/ats/";
+      break;
+    case "uk":
+      adsrv="https://web.archive.org/web/20071012052101/http://fe.lea.lycos.co.uk/ats/";
+      break;
+    case "com":
+      adsrv="https://web.archive.org/web/20071012052101/http://fe.lea.jubii.com/ats/";
+      break;
+    case "test":
+      adsrv="https://web.archive.org/web/20071012052101/http://devadclient02.st1.spray.net/ats/";
+      break;
+    case "stage":
+      adsrv="https://web.archive.org/web/20071012052101/http://ats.vip.spray.net/testads/";
+      break;
+    case "fail":
+      adsrv="https://web.archive.org/web/20071012052101/http://adclient81.st1.spray.net/testads/";
+      break;
+    default:
+      adsrv="https://web.archive.org/web/20071012052101/http://fe.lea.lycos."+cc+"/ats/";
+  }
+
+  now = new Date();
+  var ts = now.getTime();
+  var alldiv=document.body.getElementsByTagName('div');
+  var adstring=adsrv+'getad.php?adinfo=';
+  for (i=0;i<alldiv.length;i++) { if (alldiv[i].id.indexOf('lea_') == 0) { adstring += alldiv[i].id + "|"; } }
+//  document.write('<h3>'+adstring+other+'|'+escape(refurl)+'|'+ts+'</h3>');
+  document.write('<scr'+'ipt src="'+adstring+other+'|'+escape(refurl)+'|'+ts+'"></scr'+'ipt>');
+}
+
+
+function reloadAd(divContainer){
+        divContainer = document.getElementById(divContainer);
+        var lycos_randomnumber=Math.floor(Math.random()*10000000000);
+        var iframeid = divContainer.id.replace("_ajax_", "_");
+
+         switch(divContainer.id) {
+                case "lea_ajax_120x600":
+                var iframewidth ="120";
+                var iframeheight="600";
+              break;
+                case "lea_ajax_300x250":
+                var iframewidth ="300";
+                var iframeheight="250";
+              break;
+                case "lea_ajax_728x90":
+                var iframewidth ="728";
+                var iframeheight="90";
+              break;
+                }
+
+        tempChild = divContainer.firstChild;
+        while ( tempChild != null ) {
+                divContainer.removeChild(tempChild);
+                tempChild = divContainer.firstChild;
+        }
+
+        var oScript = document.createElement("iframe");
+		oScript.setAttribute("src", "https://web.archive.org/web/20071012052101/http://www.jubii.com/jubii-web-1.0/frame-ad-loader.jsp?random=" + lycos_randomnumber + "&id=" + iframeid);
+
+        oScript.setAttribute("width", iframewidth + "px;");
+        oScript.setAttribute("height", iframeheight + "px;");
+        oScript.setAttribute("border", "0");
+        oScript.setAttribute("scrolling", "no");
+        oScript.setAttribute("frameBorder", "0");
+        oScript.setAttribute("marginWidth", "0");
+        oScript.setAttribute("marginHeight", "0");
+        oScript.setAttribute("hspace", "0");
+        oScript.setAttribute("vspace", "0");
+        divContainer.appendChild(oScript);
+}
+
+
+}
+/*
+     FILE ARCHIVED ON 05:21:01 Oct 12, 2007 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:28:22 Aug 06, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 1215.999
+  exclusion.robots: 0.078
+  exclusion.robots.policy: 0.069
+  cdx.remote: 0.053
+  esindex: 0.008
+  LoadShardBlock: 1156.321 (3)
+  PetaboxLoader3.datanode: 489.93 (4)
+  load_resource: 41.195
+  PetaboxLoader3.resolve: 28.118
+*/

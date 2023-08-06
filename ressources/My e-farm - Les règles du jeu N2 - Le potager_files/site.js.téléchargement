@@ -1,0 +1,1391 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+var submit=0;
+
+
+
+
+
+
+// Mise en page d'accueil
+function ajouterHomepage(lien, obj)
+{
+	// IE seulement
+	if (document.all)
+	{
+		obj.style.behavior='url(#default#homepage)';
+		obj.setHomePage(lien);
+	}
+}
+
+
+
+
+// Mise en favoris
+function ajouterFavoris(lien, texte)
+{
+	// Firefox
+	if (window.sidebar)
+	{
+		window.sidebar.addPanel(texte, lien, '');
+	}
+	// Les autres
+	else
+	{
+		window.external.AddFavorite(lien, texte);
+	}
+}
+
+
+
+// Le message d'avertissement de l'autologin
+function messageAutologin()
+{
+	// On affiche le message d'aertissement
+	var rep=window.confirm("Attention, vous ne devez pas utiliser cette option si l\'ordinateur sur lequel vous êtes est utilisé par plusieurs personnes.\n\nEn effet si vous activez cette option, les autres utilisateurs de cet ordinateur pourront aller sur votre compte My e-farm sans avoir besoin de connaître votre mot de passe !\n\n Etes-vous sûr de vouloir activer cette option ?")
+	if (rep) document.log.submit();
+	else return false;
+}
+
+
+
+
+// La pop-up de la visite guidee
+function openVisite()
+{
+  var largeur=740;
+  var hauteur=630;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('visite.php', 'myefarmvisite','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=no,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+
+// La pop-up de detail d'un fermier
+function openDetail(id)
+{
+  var largeur=535;
+  var hauteur=400;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('fiche_ident-i-'+id+'.htm', 'myefarmdetail','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=no,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+
+// La pop-up de chat
+function openChat(chat, hash)
+{
+  var largeur=700;
+  var hauteur=590;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('https://web.archive.org/web/20071013104212/http://irc.myefarm.com/chat_pop.php?chat='+chat+'&hashcode='+hash, 'myefarmchat','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=no,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+
+// La pop-up des connectes
+function openConnectes()
+{
+  var largeur=580;
+  var hauteur=500;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('connectes.php', 'myefarmconnectes','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=yes,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+
+
+// La pop-up du bloc-note
+function openBlocnote()
+{
+  var largeur=860;
+  var hauteur=560;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('blocnote_pop.php', 'myefarmblocnote','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=no,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+
+// La pop-up du graphe de progression
+function openProgression()
+{
+  var largeur=850;
+  var hauteur=650;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('progression_pop.php', 'myefarmprogression','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=no,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+
+// La pop-up du journal
+function openJournal(n)
+{
+  var largeur=1000;
+  var hauteur=650;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('journal/edition-'+n+'/journal.php', 'myefarmjournal','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+
+// La pop-up des smileys
+function openSmiley()
+{
+  var largeur=400;
+  var hauteur=500;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('/img/smiley/index.htm', 'myefarmsmiley','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=yes,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+
+
+// La pop-up des sanctions
+function openSanction(id)
+{
+  var largeur=520;
+  var hauteur=350;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('forum_sanction.php?id='+id, 'myefarmsanction','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=no,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+// La pop-up de l'edition des titres
+function openEditionPost(id)
+{
+  var largeur=500;
+  var hauteur=300;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('forum_edition_post.php?id='+id, 'myefarmeditionpost','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=no,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+// La pop-up du changement de mail
+function openChangeMail()
+{
+  var largeur=500;
+  var hauteur=300;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('compte_changemail.php', 'myefarmchangemail','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=no,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+// La pop-up des filleuls
+function openAlbumPhoto()
+{
+  var largeur=980;
+  var hauteur=650;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('goodies/photo', 'myefarmalbumphoto','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+// La pop-up des filleuls
+function openParrainage()
+{
+  var largeur=580;
+  var hauteur=350;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('parrainage.php', 'myefarmparrainage','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=yes,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+// La pop-up des paroles de la musique de myefarm
+function openParolesMyefarm()
+{
+  var largeur=650;
+  var hauteur=550;
+  var top=(screen.height-hauteur)/2;
+  var left=(screen.width-largeur)/2;
+  t=window.open('https://web.archive.org/web/20071013104212/http://img.myefarm.com/goodies/audio/myefarm.htm', 'myefarmparoles','top='+top+',left='+left+',toolbar=no,status=no,scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur);
+  t.focus();
+}
+
+
+
+
+
+
+// On active / desactive la liste des departements selon le pays selectionne
+function checkPays()
+{
+	if(document.inscription.pays.options[document.inscription.pays.selectedIndex].value==33)
+		document.inscription.departement.disabled=false;
+	else
+		document.inscription.departement.disabled=true;
+
+	return true;
+}
+
+
+
+
+
+
+
+// On verifie que le formulaire d'inscription est rempli correctement
+function verifInscription()
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var email=document.inscription.email.value;
+	var ok=true;
+
+	// Une civilite selectionnee
+	if (document.inscription.civ.selectedIndex==0)
+	{
+	 	 message+="- Vous devez choisir une civilité\n";
+		 ok=false;
+	}
+
+	// Dans le cas de la Jordanie, il n'y a pas de verif a faire
+	if (document.inscription.pays.value!=962)
+	{
+		// Un pays selectionne
+		if (document.inscription.pays.selectedIndex==0)
+		{
+		 	 message+="- Vous devez choisir un pays\n";
+			 ok=false;
+		}
+
+		// Le departement non vide si c'est un francais
+		if (document.inscription.pays.options[document.inscription.pays.selectedIndex].value==33)
+			if (document.inscription.departement.selectedIndex==0)
+			{
+			 	 message+="- Vous devez choisir un département\n";
+				 ok=false;
+			}
+	}
+
+	// Le mail
+	if (email.indexOf('@',0)==-1 || email.indexOf('.',0)==-1 || email.indexOf(' ',0)!=-1)
+	{
+	 	 message+="- L'adresse e-mail ne semble pas correcte\n";
+		 ok=false;
+	}
+
+	// Le pseudo
+	if (document.inscription.pseudo.value.length<2)
+	{
+	 	 message+="- Le champ pseudo doit faire 2 caractères minimum\n";
+		 ok=false;
+	}
+
+	// Le mot de passe
+	if (document.inscription.password.value=='')
+	{
+	 	 message+="- Le mot de passe est vide\n";
+		 ok=false;
+	}
+
+	// L'acceptation des conditions
+	if (document.inscription.acc.checked==false)
+	{
+	 	 message+="- Vous devez accepter les règles du jeu\n";
+		 ok=false;
+	}
+
+	// La date de naissance
+	if (document.inscription.anniv0.value=='' || document.inscription.anniv1.value=='' || document.inscription.anniv2.value==''
+			|| document.inscription.anniv0.value<1 || document.inscription.anniv0.value>31
+			|| document.inscription.anniv1.value<1 || document.inscription.anniv1.value>12
+			|| document.inscription.anniv2.value<1900)
+	{
+	 	 message+="- Votre date de naissance n'a pas l'air correcte\n";
+		 ok=false;
+	}
+
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+
+
+
+
+
+
+// On verifie que le formulaire de contact est rempli correctement
+function verifContact()
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var email=document.contact.email.value;
+	var ok=true;
+
+	// Le nom
+	if (document.contact.nom.value=='')
+	{
+	 	 message+="- Le champ nom est vide\n";
+		 ok=false;
+	}
+
+	// Le mail
+	if (email.indexOf('@',0)==-1 || email.indexOf('.',0)==-1 || email.indexOf(' ',0)!=-1)
+	{
+	 	 message+="- L'adresse e-mail ne semble pas correcte\n";
+		 ok=false;
+	}
+
+	// Le message
+	if (document.contact.message.value=='')
+	{
+	 	 message+="- Le message est vide\n";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+
+
+// On verifie que le formulaire de probleme de code est rempli correctement
+function verifContactCode()
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var email=document.contact.email.value;
+	var ok=true;
+
+	// Le pseudo
+	if (document.contact.pseudo.value=='')
+	{
+	 	 message+="- Le champ pseudo est vide\n";
+		 ok=false;
+	}
+
+	// Le mail
+	if (email.indexOf('@',0)==-1 || email.indexOf('.',0)==-1 || email.indexOf(' ',0)!=-1)
+	{
+	 	 message+="- L'adresse e-mail ne semble pas correcte\n";
+		 ok=false;
+	}
+
+	// Le code
+	if (document.contact.code.value=='')
+	{
+	 	 message+="- Le champ code est vide\n";
+		 ok=false;
+	}
+
+	// Le service concerne
+	if (document.contact.service.selectedIndex==0)
+	{
+	 	 message+="- Vous devez spécifier le service concerné\n";
+		 ok=false;
+	}
+
+	// Le type de code
+	if (document.contact.type.selectedIndex==0)
+	{
+	 	 message+="- Vous devez préciser le type de code\n";
+		 ok=false;
+	}
+
+	// La date
+	if (document.contact.quand.value=='')
+	{
+	 	 message+="- La date et l'heure d'obtention est vide\n";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+
+
+
+
+// On verifie que le formulaire de mot de passe perdu est rempli correctement
+function verifPassword()
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var email=document.perdu.email.value;
+	var ok=true;
+
+	// Le pseudo
+	if (document.perdu.pseudo.value=='')
+	{
+	 	 message+="- Le champ pseudo est vide\n";
+		 ok=false;
+	}
+
+	// Le mail
+	if (email.indexOf('@',0)==-1 || email.indexOf('.',0)==-1 || email.indexOf(' ',0)!=-1)
+	{
+	 	 message+="- L'adresse e-mail ne semble pas correcte\n";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+
+
+
+
+
+
+// On verifie que le formulaire de changement de password est rempli correctement
+function verifMotdepasse()
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var ok=true;
+
+	// Le mot de passe actuel
+	if (document.mdp.password.value=='')
+	{
+	 	 message+="- Le champ mot de passe actuel est vide\n";
+		 ok=false;
+	}
+
+	// Le nouveau non vide
+	if (document.mdp.newpass.value=='')
+	{
+	 	 message+="- Le champ du nouveau mot de passe ne doit pas être vide\n";
+		 ok=false;
+	}
+
+	// Le nouveau different du pseudo
+	if (ok && document.mdp.pseudo.value==document.mdp.newpass.value)
+	{
+	 	 message+="- Votre nouveau mot de passe ne doit pas être identique à votre pseudo\n";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+
+
+
+// On verifie que le formulaire de recherche est ok
+function verifRechercheForum()
+{
+	var rech=new String();
+	var ok=true;
+
+	if (!verifSubmit()) return false;
+
+	// Taille de la recherche >1
+	if (document.recherche.rech.value.length<2)
+	{
+	 	 message="Le motif de recherche doit faire 2 caractères minimum";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+
+// On verifie que le mec valide pas 10 fois
+function verifSubmit()
+{
+	/*if (submit)
+		window.alert('Vous venez de valider, patientez quelques instants');*/
+
+	return !submit;
+}
+
+
+
+
+
+// On demande confirmation lors de la vente du vehicule au N2
+function validVenteVehiculeN2()
+{
+	if (window.confirm('Etes-vous sûr de vouloir vendre votre véhicule à la casse ?')) document.venteCasse.submit();
+}
+
+
+
+
+
+
+
+// On valide une action
+function valid(formu, act)
+{
+	if (!verifSubmit()) return false;
+
+	submit=1;
+
+	eval('document.'+formu+'.act.value="'+act+'";');
+	eval('document.'+formu+'.submit();');
+}
+
+
+
+
+
+
+
+// On inverse les checkbox d'un formulaire
+function invert(formu)
+{
+	field=document.forms[formu].elements;
+
+	for (i=0;i<field.length; i++)
+		if (!field[i].disabled) field[i].checked=!field[i].checked;
+}
+
+
+
+
+// On ne selectionne que les poulaillers avec couveuses
+function selectN2Couveuses(formu)
+{
+	field=document.forms[formu].elements;
+
+	nb=0;
+	for (i=0;i<field.length; i++)
+		if (field[i].name=='couv[]') if (field[i].value>0)
+		{
+			field[i-1].checked=!field[i-1].checked;
+			nb++;
+		}
+
+	// On gere la barre d'etat
+	if (nb>1) self.status=nb+' poulaillers sélectionnés';
+	else
+	{
+		if (nb==0) nb='Aucun';
+		self.status=nb+' poulailler sélectionné';
+	}
+
+	setTimeout('self.status="";', 6000);
+}
+
+
+
+
+
+// Permet de ticker la checkbox d'un element
+//	- poulaillers N2 en cliquant sur l'image
+//	- silos N3 en cliquant sur l'image
+//	- citernes N3 en cliquant sur l'image
+function tickElement(chk)
+{
+	document.getElementById(chk).checked=!document.getElementById(chk).checked;
+}
+
+
+
+
+
+
+// On verifie que le post du forum est ok
+function verifPost()
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var ok=true;
+
+	// Le titre
+	if (document.post.titre.value=='')
+	{
+	 	 message+="- Le champ titre est vide\n";
+		 ok=false;
+	}
+
+	// Le post
+	if (document.post.post.value=='')
+	{
+	 	 message+="- Le message est vide\n";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+
+// On se souvient de la position du curseur pour toutes les fonctions d'insertion qui suivent
+function storeCaret(tx)
+{
+	if (tx.createTextRange) tx.caretPos=document.selection.createRange().duplicate();
+}
+
+
+
+// On ajoute un smiley dans le message
+function addSmiley(img)
+{
+	img=' '+img+' ';
+
+	if (document.post.post.createTextRange && document.post.post.caretPos && !document.selection.createRange().text)
+	{
+		var cPos=document.post.post.caretPos;
+		cPos.text=img;
+		document.post.post.focus();
+	}
+	else
+	{
+		var textDeb=document.post.post.value.substring( 0 , document.post.post.selectionEnd );
+		var textFin=document.post.post.value.substring( document.post.post.selectionEnd , document.post.post.textLength );
+		document.post.post.value=textDeb + img + textFin;
+		document.post.post.focus();
+	}
+
+	return;
+}
+// On va ajouter du texte en gras
+function addGras()
+{
+	document.post.post.value+='[b]Le texte ici[/b]';
+	document.post.post.focus();
+
+	return;
+}
+// On va ajouter du texte en couleur
+function addCouleur()
+{
+	document.post.post.value+='[couleur=blue]Le texte ici[/couleur]';
+	document.post.post.focus();
+
+	return;
+}
+// On va ajouter un indice
+function addIndice()
+{
+	document.post.post.value+='[indice]L\'indice ici[/indice]';
+	document.post.post.focus();
+
+	return;
+}
+
+
+
+// On affiche ou cache les indices
+function switch_indice(cpt)
+{
+	var lyrB=document.getElementById('indiceB'+cpt);
+	var lyr=document.getElementById('indice'+cpt);
+
+	if (lyr.style.display=='none')
+	{
+		lyrB.style.display='none';
+		lyr.style.display='';
+	}
+	else
+	{
+		lyrB.style.display='';
+		lyr.style.display='none';
+	}
+
+	return;
+}
+
+
+
+
+// Les differents messages pre-remplis
+// Pas de style SMS
+function addAutoSMS()
+{
+	document.post.modo.value=1;
+	document.post.post.value='[couleur=red]Attention : tous dans ce forum ne savent pas déchiffrer le "style SMS"... Merci donc de ne pas l\'utiliser.[/couleur]';
+	return;
+}
+// Soluce
+function addAutoSoluce()
+{
+	document.post.modo.value=1;
+	document.post.post.value='[couleur=green]Le post du joueur ... a été modifié car il contenait des soluces. Merci d\'utiliser vos MP pour des échanges trop techniques.[/couleur]';
+	return;
+}
+// Indice
+function addAutoIndice()
+{
+	document.post.modo.value=1;
+	document.post.post.value="[couleur=blue]Les indices ne sont pas là pour jouer avec, merci.\n\nPour une meilleure utilisation des indices vous pouvez lire ce post :\nhttp://fr.myefarm.com/forum.php?f=254&p=2828813 <:)[/couleur]";
+	return;
+}
+// Sanction
+function addAutoSanction()
+{
+	document.post.modo.value=1;
+	document.post.post.value='[couleur=blue]Le joueur ... a été sanctionné suite à ...[/couleur]';
+	return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// On verifie que le message est ok
+function verifMessage(m)
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var ok=true;
+
+	// Le destinataire
+	if (m==0 && document.post.d[document.post.d.selectedIndex].value==-1)
+	{
+	 	 message+="- Vous n'avez pas choisi de destinataire\n";
+		 ok=false;
+	}
+
+	// Le titre
+	if (document.post.titre.value=='')
+	{
+	 	 message+="- Le champ titre est vide\n";
+		 ok=false;
+	}
+
+	// Le post
+	if (document.post.post.value=='')
+	{
+	 	 message+="- Le message est vide\n";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+
+
+// On s'assure que seuls des chiffres sont entres
+function verifInt(ev)
+{
+	// Pour IE
+	if (ev.keyCode && (ev.keyCode<48 || ev.keyCode>57) && ev.keyCode!=8 && ev.keyCode!=9 && ev.keyCode!=13 && ev.keyCode!=37 && ev.keyCode!=39 && ev.keyCode!=46)
+		return false;
+
+	// Pour Mozilla
+	if (ev.which && (ev.which<48 || ev.which>57) && ev.which!=8 && ev.which!=13)
+		return false;
+
+	return true;
+}
+
+
+
+
+
+
+
+// On s'assure que seuls des chiffres ou une virgule / point sont entres
+function verifReal(ev)
+{
+	// Pour IE
+	if (ev.keyCode && (ev.keyCode<48 || ev.keyCode>57) && ev.keyCode!=8 && ev.keyCode!=9 && ev.keyCode!=13 && ev.keyCode!=37 && ev.keyCode!=39 && ev.keyCode!=44 && ev.keyCode!=46)
+		return false;
+
+	// Pour Mozilla
+	if (ev.which && (ev.which<48 || ev.which > 57) && ev.which!=8 && ev.which!=13 && ev.which!=44 && ev.which!=46)
+		return false;
+
+	return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+// Le javascript du marche
+// La liste des achats -> deux tableaux (qtt / prix)
+var ha_qtt=new Array();
+var ha_prx=new Array();
+
+// On met a jour un element de la liste
+function marcheChange(id, qtt, qttmax, prix)
+{
+	// On met a jour l'element
+	ha_qtt[id]=qtt;
+	ha_prx[id]=prix;
+
+	// On calcule le cout total
+	tot=0;
+	for (i=0; i<ha_qtt.length; i++)
+		if(ha_qtt[i])
+			tot+=ha_qtt[i]*ha_prx[i];
+
+	// On vire l'erreur d'arrondi de JS
+	tot=(Math.round(tot*100))/100;
+
+	// On gere les chiffres apres la virgule
+	tot=tot.toString();
+	if (tot.indexOf('.',0)==-1) tot=tot+'.00';
+	if (tot.length-tot.lastIndexOf('.',tot.length-1)==2) tot=tot+'0';
+
+	// On met a jour le cout total
+	document.marche.total.value=tot;
+}
+
+
+
+// On interdit de valider 36 fois le meme achat
+function verifMarche()
+{
+	if (!verifSubmit()) return false;
+
+	submit=1;
+	return true;
+}
+
+
+
+// La mise a jour des totaux de la feuille de livraison N3
+function livraisonN3Change()
+{
+	// Le formulaire
+	var f=document.livraison;
+	// On recalcule tous les totaux provisiores
+		// Ble
+		f.tot10.value=formateMilliersInt(replaceAll(f.qtt10.value, ' ', '')*8);
+		// Mais
+		f.tot11.value=formateMilliersInt(replaceAll(f.qtt11.value, ' ', '')*8);
+		// Carottes
+		f.tot12.value=formateMilliersInt(replaceAll(f.qtt12.value, ' ', '')*9);
+		// Salade
+		f.tot13.value=formateMilliersInt(replaceAll(f.qtt13.value, ' ', '')*9);
+		// Essence
+		f.tot21.value=formateMilliersInt(replaceAll(f.qtt21.value, ' ', '')*10);
+		// Super savon
+		f.tot22.value=formateMilliersInt(replaceAll(f.qtt22.value, ' ', '')*30);
+		// Super seringues
+		f.tot23.value=formateMilliersInt(replaceAll(f.qtt23.value, ' ', '')*40);
+		// Mega foin
+		f.tot24.value=formateMilliersInt(replaceAll(f.qtt24.value, ' ', '')*20);
+
+	// Les totaux globaux
+		// Livraison normale
+		f.total.value=formateMilliersInt(
+									parseInt(replaceAll(f.tot10.value, ' ', ''))+
+									parseInt(replaceAll(f.tot11.value, ' ', ''))+
+									parseInt(replaceAll(f.tot12.value, ' ', ''))+
+									parseInt(replaceAll(f.tot13.value, ' ', ''))+
+									parseInt(replaceAll(f.tot21.value, ' ', ''))+
+									parseInt(replaceAll(f.tot22.value, ' ', ''))+
+									parseInt(replaceAll(f.tot23.value, ' ', ''))+
+									parseInt(replaceAll(f.tot24.value, ' ', '')));
+		// Livraison expresse
+		f.diffexpress.value=formateMilliersInt((Math.round(parseInt(replaceAll(f.total.value, ' ', ''))*0.1*100))/100);
+		f.totalexpress.value=formateMilliersInt((Math.round(parseInt(replaceAll(f.total.value, ' ', ''))*1.1*100))/100);
+}
+
+
+// Formatte une chaine numerique avec un separateur de milliers
+function formateMilliersInt(val)
+{
+	var separator = " ";
+	var str = String(val);
+	var dec;
+
+	// S'il y a une partie decimale, on ne traite que la partie entiere
+	if (str.indexOf('.') != -1)
+	{
+		str = str.split('.');
+		dec = str[1];
+		str = str[0];
+	}
+
+	var res = str.replace ( new RegExp ( separator, "g" ), "" );
+	var regexp = new RegExp ( "\\B(\\d{3})(" + separator + "|$)" );
+
+	do
+	{
+		res = res.replace ( regexp, separator + "$1" );
+	} while ( res.search ( regexp ) >= 0 )
+
+	// On remet la partie decimale
+	if (dec)
+	{
+		// La partie decimale sur deux chiffres
+		if (dec<10) dec=dec*10;
+		res=res+'.'+dec;
+	}
+
+	return res;
+}
+// Applique la fonction formateMilliersInt a une textebox
+function formateMilliersIntTextBox(input, ev)
+{
+	input.value=formateMilliersInt(input.value);
+
+	// Pour IE
+	// Si la touche etait un tab, on selectionne le contenu
+	if (ev.keyCode && (ev.keyCode==9))
+		input.select();
+
+}
+
+
+
+// Remplace toutes les occurences de from par to en utilisant la fonction replace
+function replaceAll(str, from, to)
+{
+	do
+	{
+		str = str.replace(from, to);
+	} while (str.search(from) != -1);
+
+	return str;
+}
+
+
+
+
+// Compte le nombre de c dans la chaine str
+function getNbChar(c, str)
+{
+	var nb=-1;
+	var i=-1;
+
+	do
+	{
+		nb++;
+		i=str.indexOf(c,i+1);
+	} while(i!=-1);
+
+	return nb;
+}
+
+
+
+// On verifie que le formulaire de vente est ok
+function verifVente()
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var ok=true;
+
+	// La quantite non nulle
+	if (document.vente.qtt.value==0)
+	{
+	 	 message+="- La quantité doit être supérieure à 0\n";
+		 ok=false;
+	}
+
+	// Le prix non nul
+	if (document.vente.prix.value==0)
+	{
+	 	 message+="- Le prix de vente doit être supérieur à 0\n";
+		 ok=false;
+	}
+
+	// Le nombre de , et . <2
+	if (getNbChar(',', document.vente.prix.value) + getNbChar('.', document.vente.prix.value)>1)
+	{
+	 	 message+="- Le prix de vente ne semble pas correct\n";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+// On verifie que le formulaire de vente est ok
+function verifVenteN2Animaux(male, femelle)
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var ok=true;
+
+	// La quantite non nulle
+	if ((male && document.vente.qttm.value==0) || (femelle && document.vente.qttf.value==0))
+	{
+	 	 message+="- La quantité doit être supérieure à 0\n";
+		 ok=false;
+	}
+
+	// Le prix non nul
+	if ((male && document.vente.prixm.value==0) || (femelle && document.vente.prixf.value==0))
+	{
+	 	 message+="- Le prix de vente doit être supérieur à 0\n";
+		 ok=false;
+	}
+
+	// Le nombre de , et . <2
+	if ((male && getNbChar(',', document.vente.prixm.value) + getNbChar('.', document.vente.prixm.value)>1)
+	|| (femelle && getNbChar(',', document.vente.prixf.value) + getNbChar('.', document.vente.prixf.value)>1))
+	{
+	 	 message+="- Le prix de vente ne semble pas correct\n";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+// On verifie que le formulaire de vente est ok
+function verifVenteN3Animaux(male, femelle)
+{
+	if (!verifSubmit()) return false;
+
+	var message="Le formulaire n'est pas rempli correctement :\n\n";
+	var ok=true;
+
+	// La quantite non nulle
+	if ((male && document.vente.qttm.value==0) || (femelle && document.vente.qttf.value==0))
+	{
+	 	 message+="- La quantité doit être supérieure à 0\n";
+		 ok=false;
+	}
+
+	// Le prix non nul
+	if ((male && document.vente.prixm.value==0) || (femelle && document.vente.prixf.value==0))
+	{
+	 	 message+="- Le prix de vente doit être supérieur à 0\n";
+		 ok=false;
+	}
+
+	// Le nombre de , et . <2
+	if ((male && getNbChar(',', document.vente.prixm.value) + getNbChar('.', document.vente.prixm.value)>1)
+	|| (femelle && getNbChar(',', document.vente.prixf.value) + getNbChar('.', document.vente.prixf.value)>1))
+	{
+	 	 message+="- Le prix de vente ne semble pas correct\n";
+		 ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	if (ok) submit=1;
+	return ok;
+}
+
+
+
+
+
+// On envoie vers la page de vente sur le marche au bestiaux
+function venteN3Bestiaux(formu, act)
+{
+	if (!verifSubmit()) return false;
+
+	submit=1;
+
+	// On change la destination du formulaire
+	eval('document.'+formu+'.action="/vente_bestiaux.php";');
+	eval('document.'+formu+'.act.value="'+act+'";');
+	eval('document.'+formu+'.submit();');
+}
+
+
+
+
+
+// On demande confirmation de la reinitialisation du compte
+function confirmReinit()
+{
+	return window.confirm('Etes-vous sûr de vouloir réinitialiser votre compte ?');
+}
+
+
+
+
+
+
+
+
+// On charge une page depuis une pop-up dans la fenetre principale
+function load_opener(page, cl)
+{
+	if (opener && !opener.closed)
+  	opener.location.href=page;
+	else
+		window.open(page,'main');
+
+	if (cl) window.close();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// On verifie qu'il peut ajouter l'article
+function boutiqueTSVerifAjoute(article)
+{
+	var message="Vous avez oublié d'indiquer des informations :\n\n";
+	var ok=true;
+	var choix;
+
+	// Les t-shirts
+	if (article==1)
+	{
+		// Le dos
+		choix=false;
+		elt=document.tshirt.dos;
+		for (i=0; i<elt.length; i++) if(elt[i].checked) choix=true;
+		if (!choix)
+		{
+			message+="- Vous n'avez pas choisi de visuel\n";
+			ok=false;
+		}
+
+		// La taille
+		choix=false;
+		elt=document.tshirt.taille;
+		for (i=0; i<elt.length; i++) if(elt[i].checked) choix=true;
+		if (!choix)
+		{
+			message+="- Vous n'avez pas choisi de taille\n";
+			ok=false;
+		}
+
+		// La qtt
+		if (document.tshirt.qtt.options[document.tshirt.qtt.selectedIndex].value==0)
+		{
+			message+="- La quantité est nulle\n";
+			ok=false;
+		}
+	}
+
+	// Les sacs a dos
+	if (article==2)
+	{
+		// La qtt
+		if (document.sac.qtt.options[document.sac.qtt.selectedIndex].value==0)
+		{
+			message+="- La quantité est nulle\n";
+			ok=false;
+		}
+	}
+
+	// Les tapis de souris
+	if (article==3)
+	{
+		// La qtt
+		if (document.tapis.qtt.options[document.tapis.qtt.selectedIndex].value==0)
+		{
+			message+="- La quantité est nulle\n";
+			ok=false;
+		}
+	}
+
+	if (!ok) window.alert(message);
+
+	return ok;
+}
+
+
+
+
+// On verifie que le mec a bien mis son adresse
+function boutiqueVerifAdresse()
+{
+	var message="Le formulaire est incomplet :\n\n";
+	var ok=true;
+
+	if (document.commande.adresse.value=='')
+	{
+		message+="- Mettez votre adresse de livraison\n";
+		ok=false;
+	}
+
+	if (!ok) window.alert(message);
+
+	return ok;
+}
+
+}
+/*
+     FILE ARCHIVED ON 10:42:12 Oct 13, 2007 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 11:28:21 Aug 06, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 111.957
+  exclusion.robots: 0.081
+  exclusion.robots.policy: 0.073
+  cdx.remote: 0.051
+  esindex: 0.008
+  LoadShardBlock: 74.488 (3)
+  PetaboxLoader3.datanode: 109.533 (4)
+  load_resource: 120.787
+  PetaboxLoader3.resolve: 75.82
+*/
