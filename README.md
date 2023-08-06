@@ -51,4 +51,4 @@ Nous accueillons les contributions de toute personne intéressée par ce projet.
 
 ## Licence
 
-Ce projet est sous licence [insérer le type de licence ici]. Voir le fichier [LICENSE](LICENSE.md) pour plus de détails.
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE.md) pour plus de détails.
